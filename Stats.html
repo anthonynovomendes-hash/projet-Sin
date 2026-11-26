@@ -27,6 +27,31 @@
             <h2>Statistiques de la serre</h2>
             <p>Visualisez ici vos graphiques de température, d'humidité et d'ensoleillement.</p>
         </div>
+        <div>
+  <p>Température : <span id="temp">--</span> °C</p>
+  <p>Humidité : <span id="hum">--</span> %</p>
+  <p>Dernière mise à jour : <span id="maj">--</span></p>
+</div>
+
+<script>
+  const url = "https://firebasedatabase.app";
+
+  function chargerDonnees() {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        if (data) {
+          document.getElementById("temp").innerText = data.temperature;
+          document.getElementById("hum").innerText = data.humidite;
+          document.getElementById("maj").innerText = data.timestamp;
+        }
+      });
+  }
+
+  chargerDonnees();
+  setInterval(chargerDonnees, 10000);
+</script>
+
     </section>
 
     <footer>
